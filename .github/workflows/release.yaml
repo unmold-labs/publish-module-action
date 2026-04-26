@@ -1,0 +1,46 @@
+name: release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag to publish this action from
+        required: false
+        default: v0
+        type: string
+  workflow_call:
+    inputs:
+      tag:
+        description: Tag to publish this action from
+        required: false
+        default: v0
+        type: string
+
+jobs:
+  publish-tag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Resolve tag input
+        id: tag
+        shell: bash
+        run: |
+          TAG="${{ inputs.tag || github.event.inputs.tag || 'v0' }}"
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+          echo "Will publish current commit ${GITHUB_SHA} to tag ${TAG}"
+
+      - name: Force-update tag to current commit
+        shell: bash
+        run: |
+          TAG="${{ steps.tag.outputs.tag }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Create or update the tag locally, then force-push it to origin.
+          git tag -f "${TAG}" "${GITHUB_SHA}"
+          git push origin "refs/tags/${TAG}" --force

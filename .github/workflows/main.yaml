@@ -12,7 +12,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Setup ActionLint
         id: get-actionlint
         shell: bash
@@ -25,4 +25,9 @@ jobs:
     if: github.event_name != 'pull_request'
     needs: lint
     uses: ./.github/workflows/e2e.yaml
+    secrets: inherit
+
+  release:
+    needs: e2e
+    uses: ./.github/workflows/release.yaml
     secrets: inherit
