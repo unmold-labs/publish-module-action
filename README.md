@@ -13,6 +13,7 @@ The action is configured in `action.yaml` and supports the following inputs:
 - `system` (optional): Target system for the module (for example `aws`, `gcp`).
 - `version` (required): Module version to publish.
 - `module-path` (optional): Path to the module directory inside the repository (default: `.`).
+- `overwrite` (optional): Set to `true` to overwrite an existing module version (default: `false`).
 
 ## Example usage
 
@@ -26,6 +27,7 @@ with:
   version: 1.2.3
   system: aws
   module-path: ./modules/my-module
+  overwrite: false
 ```
 
 You can call the action from a `workflow_dispatch` or on a release tag. The action runs the Unmold CLI inside a small Docker image and forwards the inputs as CLI flags.

@@ -21,6 +21,10 @@ inputs:
     description: 'Path to the module directory'
     required: false
     default: '.'
+  overwrite:
+    description: 'Whether to overwrite an existing module version'
+    required: false
+    default: 'false'
 runs:
   using: docker
   image: Dockerfile
@@ -31,3 +35,4 @@ runs:
     - '${{ inputs.version }}'
     - '--system=${{ inputs.system }}'
     - '--module-path=${{ inputs.module-path }}'
+    - '--overwrite=${{ inputs.overwrite }}'
