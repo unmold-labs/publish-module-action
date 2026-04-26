@@ -20,7 +20,7 @@ The action is configured in `action.yaml` and supports the following inputs:
 Basic example (in a workflow file):
 
 ```yaml
-uses: unmold-cloud/publish-module-action@v1
+uses: unmold-cloud/publish-module-action@v0
 with:
   unmold-api-token: ${{ secrets.UNMOLD_API_TOKEN }}
   name: my-module
