@@ -20,7 +20,7 @@ jobs:
           name: 'sample-module-${{ steps.uuid.outputs.value }}'
           system: 'aws'
           version: '1.0.0'
-          module-path: './test/module'
+          module-path: './test/fixture-module'
 
   overwrite-test:
     runs-on: ubuntu-latest
@@ -37,7 +37,7 @@ jobs:
           name: 'overwrite-test-module-${{ steps.uuid.outputs.value }}'
           system: 'aws'
           version: '1.0.0'
-          module-path: './test/module'
+          module-path: './test/fixture-module'
       - name: Publish Module (Overwrite)
         uses: ./  # Use the action defined in this repository
         with:
@@ -45,5 +45,5 @@ jobs:
           name: 'overwrite-test-module-${{ steps.uuid.outputs.value }}'
           system: 'aws'
           version: '1.0.0'
-          module-path: './test/module'
+          module-path: './test/fixture-module'
           overwrite: true
