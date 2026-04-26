@@ -13,7 +13,7 @@ inputs:
   system:
     description: 'System target of the module'
     required: false
-    default: ''
+    default: 'generic'
   version:
     description: 'Version of the module'
     required: true

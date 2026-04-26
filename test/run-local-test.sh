@@ -1,12 +1,16 @@
 #!/bin/bash
+set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$SCRIPT_DIR/.."
 
 # Load .env from repo root
 if [ -f "$REPO_ROOT/.env" ]; then
+  # Read .env file and export variables to child processes
   # shellcheck disable=SC1090
+  set -a
   source "$REPO_ROOT/.env"
+  set +a
 else
   echo ".env not found at $REPO_ROOT/.env — continuing, relying on environment variables"
 fi
@@ -14,12 +18,10 @@ fi
 # Build Docker image using Dockerfile from repo root
 docker build -t publish-module-action -f "$REPO_ROOT/Dockerfile" "$REPO_ROOT"
 
-# Generate a short random suffix for the module name
-RAND=$(date +%s%N | sed 's/[^0-9]*//g' | cut -c1-8)
-MODULE_NAME="test-module-${RAND}"
+# Run simple test
+echo "Running simple test..."
+bash "$SCRIPT_DIR/run-simple-test.sh"
 
-# Run Docker container
-docker run --rm \
-  -e UNMOLD_API_TOKEN="$UNMOLD_API_TOKEN" \
-  -v "$REPO_ROOT/test/modules":/modules:ro \
-  publish-module-action "$MODULE_NAME" 1.0.0 --system=test --module-path=/modules
+# Run overwrite test
+echo "Running overwrite test..."
+bash "$SCRIPT_DIR/run-overwrite-test.sh"

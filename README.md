@@ -10,7 +10,7 @@ The action is configured in `action.yaml` and supports the following inputs:
 
 - `unmold-api-token` (required): API token for Unmold.dev. Provide via a secret.
 - `name` (required): Module name.
-- `system` (optional): Target system for the module (for example `aws`, `gcp`).
+- `system` (optional): Target system for the module (default: `generic`).
 - `version` (required): Module version to publish.
 - `module-path` (optional): Path to the module directory inside the repository (default: `.`).
 - `overwrite` (optional): Set to `true` to overwrite an existing module version (default: `false`).

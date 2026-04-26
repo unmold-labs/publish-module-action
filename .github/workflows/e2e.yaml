@@ -5,11 +5,11 @@ on:
   workflow_call:
 
 jobs:
-  test:
+  simple-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Generate UUID
         id: uuid
         run: echo "value=$(uuidgen)" >> "$GITHUB_OUTPUT"
@@ -21,3 +21,29 @@ jobs:
           system: 'aws'
           version: '1.0.0'
           module-path: './test/module'
+
+  overwrite-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Generate UUID
+        id: uuid
+        run: echo "value=$(uuidgen)" >> "$GITHUB_OUTPUT"
+      - name: Publish Module (Initial)
+        uses: ./  # Use the action defined in this repository
+        with:
+          unmold-api-token: ${{ secrets.UNMOLD_API_TOKEN }}
+          name: 'overwrite-test-module-${{ steps.uuid.outputs.value }}'
+          system: 'aws'
+          version: '1.0.0'
+          module-path: './test/module'
+      - name: Publish Module (Overwrite)
+        uses: ./  # Use the action defined in this repository
+        with:
+          unmold-api-token: ${{ secrets.UNMOLD_API_TOKEN }}
+          name: 'overwrite-test-module-${{ steps.uuid.outputs.value }}'
+          system: 'aws'
+          version: '1.0.0'
+          module-path: './test/module'
+          overwrite: true
