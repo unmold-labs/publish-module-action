@@ -1,7 +1,8 @@
 name: 'Publish Module to Unmold'
 description: 'An action to publish a private OpenTofu or Terraform module to Unmold.dev'
-color: white
-icon: box
+branding:
+  color: white
+  icon: box
 inputs:
   unmold-api-token:
     description: 'API token for Unmold.dev'
