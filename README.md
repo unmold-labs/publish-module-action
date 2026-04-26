@@ -22,12 +22,12 @@ Basic example (in a workflow file):
 ```yaml
 uses: unmold-cloud/publish-module-action@v1
 with:
-	unmold-api-token: ${{ secrets.UNMOLD_API_TOKEN }}
+  unmold-api-token: ${{ secrets.UNMOLD_API_TOKEN }}
   namespace: my-org
-	name: my-module
-	version: 1.2.3
+  name: my-module
+  version: 1.2.3
   system: aws
-	module-path: ./modules/my-module
+  module-path: ./modules/my-module
 ```
 
 You can call the action from a `workflow_dispatch` or on a release tag. The action runs the Unmold CLI inside a small Docker image and forwards the inputs as CLI flags.
