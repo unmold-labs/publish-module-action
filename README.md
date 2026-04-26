@@ -1,6 +1,6 @@
 # publish-module
 
-Publish an OpenTofu or Terraform module to Unmold.dev from a GitHub Action workflow.
+Publish an OpenTofu or Terraform module to [Unmold.dev](https://unmold.dev) from a GitHub Action workflow.
 
 This repository contains a Docker-based GitHub Action that wraps the Unmold CLI to publish modules.
 
@@ -9,7 +9,6 @@ This repository contains a Docker-based GitHub Action that wraps the Unmold CLI 
 The action is configured in `action.yaml` and supports the following inputs:
 
 - `unmold-api-token` (required): API token for Unmold.dev. Provide via a secret.
-- `namespace` (optional): Namespace to publish the module under. If omitted the provided module name is used as-is.
 - `name` (required): Module name.
 - `system` (optional): Target system for the module (for example `aws`, `gcp`).
 - `version` (required): Module version to publish.
@@ -23,7 +22,6 @@ Basic example (in a workflow file):
 uses: unmold-cloud/publish-module-action@v1
 with:
   unmold-api-token: ${{ secrets.UNMOLD_API_TOKEN }}
-  namespace: my-org
   name: my-module
   version: 1.2.3
   system: aws
@@ -34,10 +32,11 @@ You can call the action from a `workflow_dispatch` or on a release tag. The acti
 
 ## Test Locally
 
-Run the following command with the environment variable `UNMOLD_API_TOKEN`
+Run the following command with the environment variable `UNMOLD_API_TOKEN`:
 
 ``` bash
-bash test/run-local-test.sh
+export UNMOLD_API_TOKEN=a_test_token
+cd test && bash run-local-test.sh
 ```
 
 ## Contributing

@@ -22,4 +22,4 @@ MODULE_NAME="test-module-${RAND}"
 docker run --rm \
   -e UNMOLD_API_TOKEN="$UNMOLD_API_TOKEN" \
   -v "$REPO_ROOT/test/modules":/modules:ro \
-  publish-module-action "$MODULE_NAME" 1.0.0 --namespace=publish-module-action-e2e-test --system=test --module-path=/modules
+  publish-module-action "$MODULE_NAME" 1.0.0 --system=test --module-path=/modules

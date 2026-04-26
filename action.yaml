@@ -7,10 +7,6 @@ inputs:
   unmold-api-token:
     description: 'API token for Unmold.dev'
     required: true
-  namespace:
-    description: 'Namespace for the module'
-    required: false
-    default: ''
   name:
     description: 'Name of the module'
     required: true
@@ -33,6 +29,5 @@ runs:
   args:
     - '${{ inputs.name }}'
     - '${{ inputs.version }}'
-    - '--namespace=${{ inputs.namespace }}'
     - '--system=${{ inputs.system }}'
     - '--module-path=${{ inputs.module-path }}'
