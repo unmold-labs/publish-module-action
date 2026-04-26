@@ -1,0 +1,28 @@
+name: main
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup ActionLint
+        id: get-actionlint
+        shell: bash
+        run: bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+      - name: Lint GitHub Actions workflows
+        shell: bash
+        run: ${{ steps.get-actionlint.outputs.executable }} -color
+
+  e2e:
+    if: github.event_name != 'pull_request'
+    needs: lint
+    uses: ./.github/workflows/e2e.yaml
+    secrets: inherit

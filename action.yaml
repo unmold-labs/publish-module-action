@@ -1,0 +1,35 @@
+name: 'Publish Module'
+description: 'An action to publish a module to Unmold.dev'
+inputs:
+  unmold-api-token:
+    description: 'API token for Unmold.dev'
+    required: true
+  namespace:
+    description: 'Namespace for the module'
+    required: false
+    default: ''
+  name:
+    description: 'Name of the module'
+    required: true
+  system:
+    description: 'System target of the module'
+    required: false
+    default: ''
+  version:
+    description: 'Version of the module'
+    required: true
+  module-path:
+    description: 'Path to the module directory'
+    required: false
+    default: '.'
+runs:
+  using: docker
+  image: Dockerfile
+  env:
+    UNMOLD_API_TOKEN: ${{ inputs.unmold-api-token }}
+  args:
+    - '${{ inputs.name }}'
+    - '${{ inputs.version }}'
+    - '--namespace=${{ inputs.namespace }}'
+    - '--system=${{ inputs.system }}'
+    - '--module-path=${{ inputs.module-path }}'

@@ -1,0 +1,23 @@
+name: e2e
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Generate UUID
+        id: uuid
+        run: echo "value=$(uuidgen)" >> $GITHUB_OUTPUT
+      - name: Publish Module
+        uses: ./  # Use the action defined in this repository
+        with:
+          unmold-api-token: ${{ secrets.UNMOLD_API_TOKEN }}
+          namespace: 'publish-module-action-e2e-test'
+          name: 'sample-module-${{ steps.uuid.outputs.value }}'
+          system: 'aws'
+          version: '1.0.0'
+          module-path: './test-module'

@@ -1,2 +1,5 @@
-# publish-module-action
-An action to publish module to unmold.dev
+# publish-module
+
+Publish an OpenTofu or Terraform module to Unmold.dev in your GitHub Action workflow.
+
+## Inputs
