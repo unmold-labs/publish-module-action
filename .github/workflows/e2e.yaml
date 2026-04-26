@@ -8,10 +8,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - name: Checkout
+        uses: actions/checkout@v5
       - name: Generate UUID
         id: uuid
-        run: echo "value=$(uuidgen)" >> $GITHUB_OUTPUT
+        run: echo "value=$(uuidgen)" >> "$GITHUB_OUTPUT"
       - name: Publish Module
         uses: ./  # Use the action defined in this repository
         with:
@@ -20,4 +21,4 @@ jobs:
           name: 'sample-module-${{ steps.uuid.outputs.value }}'
           system: 'aws'
           version: '1.0.0'
-          module-path: './test-module'
+          module-path: './test/module'
