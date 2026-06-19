@@ -11,4 +11,4 @@ MODULE_NAME="simple-test-module-${RAND}"
 docker run --rm \
   -e UNMOLD_API_TOKEN="$UNMOLD_API_TOKEN" \
   -v "$REPO_ROOT/test/fixture-module":/module:ro \
-  publish-module-action "$MODULE_NAME" 1.0.0 --system=test --module-path=/module
+  unmold-test-publish-module-action "$MODULE_NAME" 1.0.0 --system=test --module-path=/module

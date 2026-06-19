@@ -10,10 +10,10 @@ MODULE_NAME="overwrite-test-module-${RAND}"
 docker run --rm \
   -e UNMOLD_API_TOKEN="$UNMOLD_API_TOKEN" \
   -v "$REPO_ROOT/test/fixture-module":/module:ro \
-  publish-module-action "$MODULE_NAME" 1.0.0 --system=test --module-path=/module
+  unmold-test-publish-module-action "$MODULE_NAME" 1.0.0 --system=test --module-path=/module
 
 # Overwrite the module with the same version
 docker run --rm \
   -e UNMOLD_API_TOKEN="$UNMOLD_API_TOKEN" \
   -v "$REPO_ROOT/test/fixture-module":/module:ro \
-  publish-module-action "$MODULE_NAME" 1.0.0 --system=test --module-path=/module --overwrite=true
+  unmold-test-publish-module-action "$MODULE_NAME" 1.0.0 --system=test --module-path=/module --overwrite=true
