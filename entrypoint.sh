@@ -5,6 +5,7 @@ set -eu
 system=""
 path=""
 overwrite="false"
+access="private"
 
 for arg in "$@"; do
   case $arg in
@@ -17,11 +18,14 @@ for arg in "$@"; do
     --overwrite=*)
       overwrite="${arg#--overwrite=}"
       ;;
+    --access=*)
+      access="${arg#--access=}"
+      ;;
   esac
 done
 
 if [ "$overwrite" = "true" ]; then
-  unmold module publish "$1" "$2" --confirm --system "$system" --path "$path" --overwrite
+  unmold module publish "$1" "$2" --confirm --system "$system" --path "$path" --overwrite --access "$access"
 else
-  unmold module publish "$1" "$2" --confirm --system "$system" --path "$path"
+  unmold module publish "$1" "$2" --confirm --system "$system" --path "$path" --access "$access"
 fi

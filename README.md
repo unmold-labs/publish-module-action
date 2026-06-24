@@ -14,6 +14,7 @@ The action is configured in `action.yaml` and supports the following inputs:
 - `version` (required): Module version to publish.
 - `module-path` (optional): Path to the module directory inside the repository (default: `.`).
 - `overwrite` (optional): Set to `true` to overwrite an existing module version (default: `false`).
+- `access` (optional): Module access level, either `private` or `public` (default: `private`).
 
 ## Example usage
 
@@ -27,6 +28,7 @@ with:
   version: 1.2.3
   system: aws
   module-path: ./modules/my-module
+  access: public
   overwrite: false
 ```
 

@@ -23,6 +23,7 @@ jobs:
           system: 'aws'
           version: '1.0.0'
           module-path: './test/fixture-module'
+          access: 'public'
 
   overwrite-test:
     runs-on: ubuntu-latest

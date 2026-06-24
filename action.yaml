@@ -1,5 +1,5 @@
 name: 'Publish Module to Unmold'
-description: 'An action to publish a private OpenTofu or Terraform module to Unmold.dev'
+description: 'An action to publish an OpenTofu or Terraform module to Unmold.dev'
 branding:
   color: white
   icon: box
@@ -25,6 +25,10 @@ inputs:
     description: 'Whether to overwrite an existing module version'
     required: false
     default: 'false'
+  access:
+    description: 'Module access level'
+    required: false
+    default: 'private'
 runs:
   using: docker
   image: Dockerfile
@@ -36,3 +40,4 @@ runs:
     - '--system=${{ inputs.system }}'
     - '--module-path=${{ inputs.module-path }}'
     - '--overwrite=${{ inputs.overwrite }}'
+    - '--access=${{ inputs.access }}'
